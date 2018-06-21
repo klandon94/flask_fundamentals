@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+    <!-- Optional theme --> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <title>Counter</title>
+</head>
+<style>
+    h1,h2{
+        text-align:center;
+    }
+    #content{
+        margin-top:250px;
+        width:25%;
+        margin-left:35%;
+    }
+    a{
+        vertical-align:middle;
+    }
+    #buttons{
+        display:flex;
+        justify-content: space-around;
+    }
+</style>
+<body>
+    <div id='content'>
+        <h1>COUNTER</h1>
+        <h2>{{session['counter']}} times</h2>
+        <br><br>
+        <div id='buttons' class='center-block'>
+            <a class='btn btn-primary' href="/addonemore">Add two visits!</a>
+            <a class='btn btn-primary' href="/resetvisits">Reset to one visit</a>
+        </div>
+    </div>
+</body>
+</html>

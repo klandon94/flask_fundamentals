@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <title>Basic Registration Form</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+    <!-- Optional theme --> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="stylesheet" type='text/css' href='{{url_for('static',filename='jquery-ui.css')}}'>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $(function() {
+                $(".datepicker").datepicker();
+            });
+        </script>
+    </head>
+    <style>
+        .container{
+            padding:30px;
+            width:40%;
+            border:2px solid black;
+            margin-top:100px;
+        }
+        h1{
+            text-align:center;
+        }
+        textarea{
+            width:100%;
+        }
+        .error{
+            color:red;
+            font-style:italic;
+        }
+        .invalid{
+            color: darkgoldenrod;
+            font-weight:bold;
+        }
+        .message{
+            color: blue;
+            font-size:25px;
+        }
+    </style>
+    <body>
+        <div class='container'>
+            <h1>Basic Registration Form</h1>
+            <br>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="{{category}}">{{message}}</p>     
+                    {% endfor %}                    
+                {% endif %}
+            {% endwith %}
+            <br>
+            <form action='/create' method='post'>
+                <div class='form-group form-inline'>
+                    First Name: <input class='form-control' type='text' name='first_name' value='{{session['first_name']}}' placeholder='First Name' aria-describedby="first" >
+                    <small id='first' class='text-muted'>
+                        Must not contain any numbers
+                    </small>
+                </div>
+                <div class='form-group form-inline'>
+                    Last Name: <input class='form-control' type='text' name='last_name' value='{{session['last_name']}}' placeholder='Last Name' aria-describedby="last">
+                    <small id='last' class='text-muted'>
+                        Must not contain any numbers
+                    </small>
+                </div>
+                <div class='form-group form-inline'>
+                    Email: <input class='form-control' type='text' name='email' value='{{session['email']}}' placeholder='Email' aria-describedby="email">
+                    <small id='email' class='text-muted'>
+                        Must be a valid email address
+                    </small>
+                </div>
+                <div class='form-group form-inline'>
+                    Password: <input class='form-control' type='password' name='password' value='{{session['password']}}' placeholder='Password' aria-describedby="pw">
+                    <small id='pw' class='form-text text-muted'>
+                        Must have >8 characters, uppercase letter, number
+                    </small>
+                </div>
+                <div class='form-group form-inline'>
+                    Confirm Password: <input class='form-control' type='password' name='confirm_password' value='{{session['confirm_password']}}' placeholder='Confirm Password' aria-describedby="cpw">
+                    <small id='cpw' class='text-muted'>
+                        Must match password
+                    </small>
+                </div>
+                <div class='form-group form-inline'>
+                    Birthday: <input class='form-control datepicker' type='text' name='birthday' value='{{session['birthday']}}' placeholder='Birthday' aria-describedby="bday">
+                    <small id='bday' class='text-muted'>
+                        Must be from the past
+                    </small>
+                </div>
+                <br>
+                <input class='btn btn-primary center-block' type='submit' value='Submit'>
+            </form>
+        </div>
+    </body>
+</html>

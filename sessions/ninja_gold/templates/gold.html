@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+    <!-- Optional theme --> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <title>Ninja Gold game</title>
+</head>
+<style>
+    #container{
+        padding:25px;
+    }
+    #goldmines{
+        margin-top:100px;
+        display:flex;
+        justify-content: space-between;
+    }
+    .places{
+        border:2px solid black;
+        height:250px;
+        width:250px;
+    }
+    .places h1,h4{
+        text-align:center;
+    }
+    #activities{
+        margin-top:80px;
+    }
+    textarea{
+        width:100%;
+    }
+    #textbox{
+        overflow:scroll;
+        border:1px solid black;
+        height:150px;
+    }
+    .green{
+        color:green;
+    }
+    
+    .red{
+        color:red;
+    }
+</style>
+<body>
+    <div id='container'>
+        Your Gold: <input type = 'text' name='gold' value={{session['gold']}}>
+        <div id='goldmines'>
+            <div class='places'>
+                <h1>Farm</h1>
+                <br>
+                <h4>(earns 10-20 golds)</h4>
+                <br>
+                <form action="/process_money" method='post'>
+                    <input type='hidden' name='property' value='farm'>
+                    <input class='btn btn-primary center-block' type='submit' value='find gold!'>
+                </form>
+            </div>
+            <div class='places'>
+                <h1>Cave</h1>
+                <br>
+                <h4>(earns 5-10 golds)</h4>
+                <br>
+                <form action="/process_money" method='post'>
+                    <input type='hidden' name='property' value='cave'>
+                    <input class='btn btn-primary center-block' type='submit' value='find gold!'>
+                </form>
+            </div>
+            <div class='places'>
+                <h1>House</h1>
+                <br>
+                <h4>(earns 2-5 golds)</h4>
+                <br>
+                <form action="/process_money" method='post'>
+                    <input type='hidden' name='property' value='house'>
+                    <input class='btn btn-primary center-block' type='submit' value='find gold!'>
+                </form>
+            </div>
+            <div class='places'>
+                <h1>Casino</h1>
+                <br>
+                <h4>(earns/takes 0-50 golds)</h4>
+                <br>
+                <form action="/process_money" method='post'>
+                    <input type='hidden' name='property' value='casino'>
+                    <input class='btn btn-primary center-block' type='submit' value='find gold!'>
+                </form>
+            </div>
+        </div>
+        <div id = 'activities'>
+            Activities:
+            <div class='form-group'>
+                <div id="textbox">
+                    {% for x in session['activities'] %}
+                        <p class='{{x.class}}'>{{x.content}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <a class='btn btn-primary' href='/reset'>Click to reset game</a>
+    </div>
+</body>
+</html>
